@@ -1,0 +1,79 @@
+/* Container for the sign-up form */
+.signup-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Slightly softer shadow */
+}
+
+/* Heading for the form */
+.signup-container h1 {
+    text-align: center;
+    color: #1e90ff;
+    margin-bottom: 20px;
+    font-size: 24px;  /* Slightly smaller for a smoother look */
+    font-weight: 500;  /* Lighter weight */
+}
+
+/* Input field styles */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;  /* Slightly more spacing for readability */
+    font-weight: 400;  /* Lighter weight */
+    font-size: 14px;  /* Slightly smaller for a smoother look */
+    color: #333;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 12px;  /* Slightly more padding for smoother input */
+    border: 1px solid #ddd;  /* Softer border */
+    border-radius: 6px;  /* More rounded borders */
+    font-size: 16px;
+    transition: all 0.3s ease;  /* Smooth transition for focus */
+}
+
+.input-group input:focus, .input-group select:focus {
+    outline: none;
+    border-color: #1e90ff;
+    box-shadow: 0 0 4px rgba(30, 144, 255, 0.5);  /* Soft blue glow */
+}
+
+/* Submit button styling */
+.signup-btn {
+    width: 100%;
+    padding: 14px;  /* Slightly less padding for a cleaner look */
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 6px;  /* More rounded edges */
+    font-size: 18px;
+    font-weight: 400;  /* Less bold */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;  /* Smooth transitions */
+}
+
+.signup-btn:hover {
+    background-color: #66b3ff;  /* Softer hover color */
+    transform: scale(1.02);  /* Slight scaling effect */
+}
+
+/* Add some responsiveness */
+@media (max-width: 480px) {
+    .signup-container {
+        width: 90%;
+        margin: 20px;
+        padding: 20px;  /* Less padding on smaller screens */
+    }
+
+    .signup-container h1 {
+        font-size: 22px;  /* Smaller heading size for smaller screens */
+    }
+}

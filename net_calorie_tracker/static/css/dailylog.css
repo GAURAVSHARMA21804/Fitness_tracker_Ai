@@ -1,0 +1,37 @@
+/* Button Styling */
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Primary Button Style */
+.btn-primary {
+    background-color: #1ab1ff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #007bff;
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.btn-primary:active {
+    background-color: #003366;
+}
+
+/* Optional: Styling for the button when it's disabled */
+.btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* If you want the button to look good within table cells */
+table td button {
+    margin: 0;
+    padding: 8px 15px;
+}

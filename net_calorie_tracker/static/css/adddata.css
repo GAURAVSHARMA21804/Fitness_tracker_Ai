@@ -1,0 +1,698 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Navbar */
+.navbar-below {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #115ba6;
+    color: white;
+    padding: 8px 15px;
+}
+
+.navbar-below-left h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.navbar-below-right .btn {
+    background-color: #1ab1ff;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar-below-right .btn:hover {
+    background-color: #007bff;
+    transform: translateY(-1px);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 85%;
+    max-width: 500px;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px 0;
+    background-color: transparent;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.tab-btn.active {
+    background-color: #1ab1ff;
+    color: white;
+}
+/* Ensure the form layout is clean */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Search container to manage input and the list */
+.search-container {
+    position: relative;
+}
+
+/* Style for the food list */
+.food-list {
+    position: absolute;
+    top: 100%; /* Position the list just below the input */
+    left: 0;
+    right: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;  /* Space between input and list */
+    padding: 0;
+    list-style-type: none;
+    display: none;
+    z-index: 10; /* Make sure the list is on top */
+}
+
+/* Style for individual list items */
+.food-list li {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.food-list li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Message for no results found */
+.food-list .no-results {
+    padding: 10px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+/* Styling for the Form */
+#addFoodForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Allow absolute positioning of the food list */
+}
+
+#addFoodForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#addFoodForm input[type="text"],
+#addFoodForm input[type="date"],
+#addFoodForm input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Make sure padding is included in width calculation */
+}
+
+#addFoodForm input[type="text"]:focus,
+#addFoodForm input[type="number"]:focus,
+#addFoodForm input[type="date"]:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    outline: none;
+}
+
+/* Styling for the Food Search Input */
+#foodSearch {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#foodSearch:focus {
+    border-color: #4CAF50;
+}
+
+/* Styling for the Food List */
+.food-list {
+    position: absolute;
+    top: 100%; /* Position below the input field */
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    margin-top: 5px;
+    padding: 0;
+    list-style-type: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: none; /* Hide by default */
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Allow scrolling when the list is too long */
+}
+
+.food-list li {
+    padding: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.food-list li:hover {
+    background-color: #f1f1f1;
+}
+
+/* Hidden Input for Food ID */
+#selectedFoodId {
+    display: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    #addFoodForm {
+        padding: 15px;
+        width: 90%;
+    }
+
+    #foodSearch {
+        font-size: 14px;
+    }
+
+    .food-list li {
+        font-size: 12px;
+    }
+}
+
+/* Form Styles */
+.form-container {
+    margin-top: 20px;
+}
+
+.form {
+    display: none;
+    flex-direction: column;
+}
+
+.form.active {
+    display: flex;
+}
+
+.form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.form input,
+.form textarea {
+    margin-bottom: 12px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form input:focus,
+.form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+/* Footer Buttons */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.btn-cancel {
+    background-color: #e0e0e0;
+    color: #444;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 8px;
+}
+
+.btn-cancel:hover {
+    background-color: #bdbdbd;
+    transform: translateY(-1px);
+}
+
+.btn-save {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-save:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Success message box styling */
+.success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;  /* Green background for success */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+/* Style for the activity list */
+.activity-list {
+    position: absolute;
+    top: 100%; /* Position the list just below the input */
+    left: 0;
+    right: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;  /* Space between input and list */
+    padding: 0;
+    list-style-type: none;
+    display: none;  /* Hide by default */
+    z-index: 10;  /* Ensure the list appears above other elements */
+}
+
+/* Style for individual list items */
+.activity-list li {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.activity-list li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Message for no results found */
+.activity-list .no-results {
+    padding: 10px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+/* Styling for the form */
+#addActivityForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Allow absolute positioning of the activity list */
+}
+
+/* Label styling */
+#addActivityForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* General input styling */
+#addActivityForm input[type="text"],
+#addActivityForm input[type="date"],
+#addActivityForm input[type="number"],
+#addActivityForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+/* Focus styling for input elements */
+#addActivityForm input[type="text"]:focus,
+#addActivityForm input[type="number"]:focus,
+#addActivityForm input[type="date"]:focus,
+#addActivityForm textarea:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    outline: none;
+}
+
+/* Styling for the activity search input */
+#activitySearch {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Focus styling for the activity search input */
+#activitySearch:focus {
+    border-color: #4CAF50;
+}
+
+/* Hidden input for activity ID if needed */
+#selectedActivityId {
+    display: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    #addActivityForm {
+        padding: 15px;
+        width: 90%;
+    }
+
+    #activitySearch {
+        font-size: 14px;
+    }
+
+    .activity-list li {
+        font-size: 14px;
+    }
+}
+/* Calendar Section */
+.select.calender {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.select.calender input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Logs Container */
+.logs-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    gap: 20px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background: #e3e3e3;
+    color: #4e4e4e;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:hover {
+    background: #f1f1f1;
+}
+.logs-section-summery{
+    /* font-size: 14px; */
+    flex: 1;
+    margin: 0;
+}
+.logs-section {
+    font-size: 14px;
+    flex: 1;
+    margin: 0;
+}
+
+/* Headings */
+.logs-section-summery h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #4e4e4e;
+    font-size: 1.2em;
+}
+.logs-section h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #4e4e4e;
+    font-size: 1.2em;
+}
+
+/* Selected Date Display */
+#selected-date-display {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #555;
+}
+
+
+
+/* Logs Container */
+.logs-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    gap: 20px;
+    /* flex-wrap: wrap; Ensure it adjusts responsively */
+}
+
+/* Net Calories Card Styling */
+#dailySummaryContainer {
+    /* text-align: center; */
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    max-width: 400px; /* Center alignment */
+    margin: 30px auto; /* Space between logs and the card */
+}
+
+.daily-summary-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1ab1ff;
+    margin-bottom: 10px;
+}
+
+.summary-block {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #4e4e4e;
+}
+
+.summary-block p {
+    margin: 10px 0;
+}
+
+.summary-block span {
+    font-weight: bold;
+    color: #55cd71; /* Highlighted values */
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    #dailySummaryContainer {
+        width: 90%;
+    }
+
+    .logs-container {
+        flex-direction: column; /* Stack sections vertically */
+    }
+}
+
+
+#refreshButton {
+    background-color: #1ab1ff; /* Primary blue color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the button */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+#refreshButton:hover {
+    background-color: #007bff; /* Darker blue on hover */
+}
+
+#refreshButton:active {
+    background-color: #004085; /* Even darker blue when clicked */
+}
+
+#refreshButton:focus {
+    outline: 2px solid #80bdff; /* Accessibility focus ring */
+    outline-offset: 2px;
+}
+
+
+/* Delete button specific styling */
+.btn-delete {
+    background-color: #eb6a6a; /* Red background */
+    color: white;             /* White text */
+    padding: 8px 12px;        /* Add some padding */
+    border-radius: 5px;       /* Rounded corners */
+    font-size: 14px;          /* Font size */
+    font-weight: bold; 
+    cursor: pointer;       /* Bold text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow */
+}
+
+/* Hover effect */
+.btn-delete:hover {
+    background-color: #cc0000; /* Darker red on hover */
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); Stronger shadow */
+}
+
+/* Active (pressed) effect */
+.btn-delete:active {
+    background-color: #a30000; /* Even darker red */
+    box-shadow: none;         /* Remove shadow */
+    transform: scale(0.98);   /* Slightly shrink the button */
+}

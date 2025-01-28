@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Net Calorie Tracker{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/adddata.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <nav>
+        <div class="logo">
+        
+        <a href="{% url 'tracker:users_dashboard' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+        </a>
+        
+    </div>
+    <div class="nav-buttons">
+        
+            <a href="{% url 'tracker:users_dashboard' %}" class="btn">Dashboard</a>
+            <a href="{% url 'users_auth:logout' %}" class="btn">Logout</a>
+        
+    </div>
+    </nav>
+    <nav class="navbar-below">
+            <div class="navbar-below-left">
+                <h2 id="username">{{ user.name }}</h2>
+            </div>
+            <div class="navbar-below-right">
+                
+                <button class="btn" id="addDataBtn">Add Data</button>
+            </div>
+    </nav>
+    <!-- Logs Section -->
+    <div class="select calender">
+            
+        <input type="date" id="calendar" />
+        <button id="refreshButton">Refresh</button>
+        <p id="selected-date-display">Date: </p>
+
+    </div>
+
+    <div id="dailySummaryContainer" class="daily-summary-centered">
+        <h3 class="daily-summary-title">Net Calorie</h3>
+        <div class="summary-block">
+            <p><strong>BMR:</strong> <span id="bmrValue">-</span></p>
+            <p><strong>Food:</strong> <span id="caloriesInValue">-</span></p>
+            <p><strong>Activity:</strong> <span id="caloriesOutValue">-</span></p>
+            <p><strong>Net Calories:</strong> <span id="netCaloriesValue">-</span></p>
+        </div>
+    </div>
+
+    <!-- Logs Section -->
+    <div class="logs-container">    
+        <!-- Food Logs -->
+        <div class="logs-section food-logs">
+            <h3>Food Logs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Food Name</th>
+                        <th>Meal Type</th>
+                        <th>Food Group</th>
+                        <th>Serving</th>
+                        <th>Total Calories</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="foodLogsBody">
+                    <!-- Food logs will be dynamically added here -->
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Activity Logs -->
+        <div class="logs-section activity-logs">
+            <h3>Activity Logs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Activity Name</th>
+                        <th>Description</th>
+                        <th>Duration</th>
+                        <th>Calories Burned</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="activityLogsBody">
+                    <!-- Activity logs will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+        
+    <!-- Add Data Modal -->
+    <div class="modal" id="addDataModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Data</h3>
+                <button class="close-btn" id="closeModalBtn">×</button>
+            </div>
+            <div class="modal-body">
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" id="foodTab">Add Food</button>
+                    <button class="tab-btn active" id="activityTab">Add Activity</button>
+                </div>
+                <!-- Forms -->
+                <div class="form-container">
+                <!-- Add Food Form -->
+                    <form method="POST" id="addFoodForm" class="form active">
+                    {% csrf_token %}
+                        <label for="foodDate">Select Date</label>
+                        <input type="date" id="foodDate" required>
+
+                        <label for="foodName">Search Food Name</label>
+                        <div class="search-container">
+                            <input type="text" id="foodSearch" placeholder="Search Food Name" required>
+                            <ul id="foodList" class="food-list"></ul>  <!-- List for showing search results -->
+                        </div>
+
+                        <label for="foodGroup">Food Group</label>
+                        <input type="text" id="foodGroup" readonly> <!-- Auto-filled after food selection -->
+
+                        <label for="mealType">Select Meal Type</label>
+                        <select id="mealType" required style="
+                                width: 100%;
+                                padding: 10px 15px;
+                                font-size: 16px;
+                                font-family: Arial, sans-serif;
+                                border: 1px solid #ccc;
+                                border-radius: 5px;
+                                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                                background-color: #f9f9f9;
+                                color: #333;
+                                outline: none;
+                                appearance: none;
+                                background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 10 6%27%3E%3Cpath fill=%27%23333%27 d=%27M0 0l5 6 5-6z%27/%3E%3C/svg%3E');
+                                background-repeat: no-repeat;
+                                background-position: right 10px center;
+                                background-size: 12px 12px;
+                                cursor: pointer;
+                                transition: all 0.3s ease;">
+                                <option value="" disabled selected>Select Meal Type</option>
+                                <option value="Breakfast">Breakfast</option>
+                                <option value="Lunch">Lunch</option>
+                                <option value="Dinner">Dinner</option>
+                        </select>
+
+                         <label for="serving">Serving</label>
+                         <input type="number" id="serving" placeholder="Serving Size" required>
+                            
+                        <input type="hidden" id="selectedFoodId"> <!-- Hidden input to store the food_id -->
+                    </form>
+
+
+                    <form method="POST" id="addActivityForm" class="form">
+                        <label for="activityDate">Select Date</label>
+                        <input type="date" id="activityDate" required>
+
+                        <label for="activityName">Activity Name</label>
+                        <div class="search-container">
+                            <input type="text" id="activitySearch" placeholder="Search Activity Name" required>
+                            <ul id="activityList" class="activity-list"></ul>  <!-- List for showing search results -->
+                        </div>
+
+                        <label for="specificMotion">Specific Motion</label>
+                        <input type="text" id="specificMotion" readonly> <!-- Auto-filled after food selection -->
+
+                        <label for="activityDescription">Description</label>
+                        <textarea id="activityDescription" placeholder="Activity Description" required></textarea>
+
+                        <label for="metValue">MET Value</label>
+                        <input type="number" id="metValue" placeholder="MET Value" required readonly>
+
+                        <label for="duration">Duration (minutes)</label>
+                        <input type="number" id="duration" placeholder="Duration" required>
+                        <input type="hidden" id="selectedActivityId"> <!-- Hidden input to store the activity_id -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                    <button class="btn btn-save" id="saveBtn">Save</button>
+                </div>
+            </div>
+        </div>
+
+{% endif %}
+
+{% endblock %}
+{% block scripts %}
+        <script src="{% static 'js/adddata.js' %}"></script>
+        <script src="{% static 'js/showlog.js' %}"></script>
+{% endblock %}
+

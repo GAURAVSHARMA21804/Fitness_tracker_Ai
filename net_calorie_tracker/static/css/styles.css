@@ -1,0 +1,152 @@
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1efef;
+    color: #333;
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.logo img {
+    height: 50px;
+    /* margin-left: 50px; */
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    /* margin-right: 50px; */
+    
+}
+
+.nav-buttons .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: #1ab1ff;
+    text-decoration: none;
+    font-size: 1rem;
+    border: 2px solid #1ab1ff;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-buttons .btn:hover {
+    background-color: #1ab1ff;
+    color: white;
+    border: 2px solid white;
+}
+
+.nav-buttons .btn:active {
+    transform: scale(0.98);
+}
+
+/* Main Content Section */
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem;
+    padding: 1rem;
+}
+
+.welcome-section {
+    max-width: 50%;
+}
+
+.welcome-section h1 {
+    font-size: 2.5rem;
+    color: #1ab1ff;
+    margin-bottom: 1rem;
+    margin-left: 50px;
+}
+
+.welcome-section p {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #666;
+    margin-left: 50px;
+}
+
+/* Special Button Styling */
+.special-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem; /* Space between icon and text */
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #1ab1ff, #0078d7); /* Gradient blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-left: 50px;
+}
+
+.special-btn img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain; /* Ensures the icon scales correctly */
+}
+
+.special-btn:hover {
+    transform: translateY(-2px); /* Lift the button slightly */
+    box-shadow: 0 6px 12px rgba(26, 177, 255, 0.4); /* Glow effect */
+}
+
+.special-btn:active {
+    transform: scale(0.98); /* Shrink slightly when pressed */
+}
+
+/* Image Section */
+.image-section img {
+    max-width: 100%;
+    height: 350px;
+    margin-right: 50px;
+    /* border-radius: 10px; */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .welcome-section {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .image-section img {
+        max-width: 80%;
+    }
+
+    .special-btn {
+        font-size: 1rem;
+        padding: 0.6rem 1rem;
+    }
+}

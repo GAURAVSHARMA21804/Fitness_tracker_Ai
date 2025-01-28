@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Net Calorie Tracker{% endblock %}
+
+{% block content %}
+
+<nav>
+    <div class="logo">       
+        <a href="{% url 'tracker:home' %}">
+           <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+       </a>
+     
+   </div>
+   <div class="nav-buttons">
+       
+           <a href="{% url 'users_auth:signup' %}" class="btn">Signup</a>
+           <a href="{% url 'users_auth:login' %}" class="btn">Login</a>
+   </div>
+</nav>
+
+
+<!-- Special Button Section -->
+    {% if not user.is_authenticated %}
+     <!-- Main Content Section -->
+    <div class="main-content">
+        <div class="welcome-section">
+            <h1>Welcome to the Calorie Tracker Web-app!</h1>
+            <p>This is your calorie tracker.</p>
+            <a href="{% url 'users_auth:login' %}" class="special-btn">
+                Check Your Net Calories →
+            </a>
+        </div>
+        <div class="image-section">
+            <img src="{% static 'images/calories_tracker_app.png' %}" alt="Dashboard Illustration">
+        </div>
+    </div>
+
+    {% endif %}
+{% endblock %}

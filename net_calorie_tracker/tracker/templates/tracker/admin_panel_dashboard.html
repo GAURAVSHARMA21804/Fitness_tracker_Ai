@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Net Calorie Tracker{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/adddata.css' %}">
+<link rel="stylesheet" href="{% static 'css/dailylog.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+{% endblock %}
+
+{% block content %}
+{% if  user.is_authenticated  and user.is_staff %}
+<nav>
+    <div class="logo">
+       
+       <a href="{% url 'tracker:admin_panel_dashboard' %}">
+           <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+       </a>
+       
+   </div>
+   <div class="nav-buttons">
+       
+         <a href="{% url 'tracker:admin_panel_dashboard' %}" class="btn">Dashboard</a>
+           <a href="{% url 'users_auth:logout' %}" class="btn">Logout</a>
+      
+   </div>
+</nav>
+
+<div style="background-color:#1ab1ff; "> 
+      <h2 style="margin-top:50px; margin-left: 10px; color: white; ">Admin Dashboard</h2>
+    </div>
+<div class="logs-container">    
+    
+    <!-- Food Logs -->
+    <div class="logs-section-summery food-logs">
+        <h3>Daily summery Logs all data</h3>
+            <table class="table">
+            <thead>
+                <tr>
+                    
+                    <th>Name</th>
+                    <th>Weight in kg</th>
+                    <th>Height in cm</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Age</th>
+                    <th>BMR</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.weight }}</td>
+                    <td>{{ user.height }}</td>
+                    <td>{{ user.get_gender_display }}</td>
+                    <td>{{ user.dob }}</td>
+                    <td>{{ user.age }}</td>
+                    <td>{{ user.last_calculated_bmr }}</td>
+                    <td>
+                        <a href="{% url 'tracker:daily_summery_for_admin' user.id %}" class="btn btn-primary" style="text-decoration: none;">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+   {% endif %}
+{% endblock %}
+

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Net Calorie Tracker{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/adddata.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<nav>
+    <div class="logo">
+       <!-- Link the logo to the dashboard page -->
+       
+       
+       <a href="{% url 'tracker:admin_panel_dashboard' %}">
+           <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+       </a>
+       
+   </div>
+   <div class="nav-buttons">
+       
+         <a href="{% url 'tracker:admin_panel_dashboard' %}" class="btn">Dashboard</a>
+           <a href="{% url 'users_auth:logout' %}" class="btn">Logout</a>
+       
+   </div>
+</nav>  
+    <div class="select calender">
+        <p id="selected-date-display">Date: {{selected_date}} </p>
+   </div>
+
+  <div id="dailySummaryContainer" class="daily-summary-centered">
+    <h3 class="daily-summary-title">Net Calorie</h3>
+    <div class="summary-block">
+        <p><strong>BMR:</strong> {{ daily_summary.bmr|default:"-" }}</p>
+        <p><strong>Food:</strong> {{ daily_summary.calories_in|default:"-" }}</p>
+        <p><strong>Activity:</strong> {{ daily_summary.calories_out|default:"-" }}</p>
+        <p><strong>Net Calories:</strong> {{ daily_summary.net_calories|default:"-" }}</p>
+    </div>
+</div>
+<!-- Logs Section -->
+<div class="logs-container">    
+    <!-- Food Logs -->
+    <div class="logs-section food-logs">
+        <h3>Food Logs</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Food Name</th>
+                    <th>Meal Type</th>
+                    <th>Food Group</th>
+                    <th>Serving</th>
+                    <th>Total Calories</th>
+                    
+                </tr>
+            </thead>
+                <tbody id="foodLogsBody">
+                {% for log in food_logs %}
+                <tr>
+                    <td>{{ log.date}}</td>
+                    <td>{{ log.food_item.food_name }}</td>
+                    <td>{{ log.meal_type }}</td>
+                    <td>{{ log.food_item.food_group }}</td>
+                    <td>{{ log.serving_count }}</td>
+                    <td>{{ log.total_calories }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Activity Logs -->
+    <div class="logs-section activity-logs">
+        <h3>Activity Logs</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Activity Name</th>
+                    <th>Description</th>
+                    <th>Duration</th>
+                    <th>Calories Burned</th>
+                    
+                </tr>
+            </thead>
+                <tbody id="activityLogsBody">
+                {% for log in activity_logs %}
+                <tr>
+                    <td>{{ log.date}}</td>
+                    <td>{{ log.activity.activity_name }}</td>
+                    <td>{{ log.description }}</td>
+                    <td>{{ log.duration_minutes }}</td>
+                    <td>{{ log.calories_burned }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+   
+{% endif %}
+
+{% endblock %}
